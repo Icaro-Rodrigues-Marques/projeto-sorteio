@@ -14,16 +14,16 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotBlank(message = "O campo nome do usuário é obrigatório!")
 	private String name;
-	
+
 	@NotBlank(message = "O campo nome do username é obrigatório!")
 	private String username;
-	
+
 	@NotBlank(message = "O campo password é obrigatório!")
 	private String password;
-	
+
 	@NotBlank(message = "O campo nome do email é obrigatório!")
 	private String email;
 
@@ -66,9 +66,26 @@ public class Users {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Users other = (Users) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 }

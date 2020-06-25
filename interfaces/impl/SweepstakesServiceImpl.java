@@ -3,11 +3,13 @@ package br.com.imepac.site.interfaces.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.imepac.site.entities.Sweepstakes;
 import br.com.imepac.site.entities.repositories.SweepstakesRepository;
 
-public class SweepstakesServiceImpl implements SweepstakesServico {
+@Component
+public class SweepstakesServiceImpl implements SweepstakesService {
 	
 	@Autowired
 	private SweepstakesRepository sweepstakesRepository;

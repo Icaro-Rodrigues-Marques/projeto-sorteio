@@ -9,7 +9,7 @@ import br.com.imepac.site.entities.Users;
 import br.com.imepac.site.entities.repositories.UsersRepository;
 
 @Service
-public class UsersServiceImpl implements UsersServico {
+public class UsersServiceImpl implements UsersService {
 
 	@Autowired
 	private UsersRepository usuarioRepository;

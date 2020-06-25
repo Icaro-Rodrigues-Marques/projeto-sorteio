@@ -4,27 +4,50 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.imepac.site.entities.Users;
-import br.com.imepac.site.interfaces.impl.UsersServico;
+import br.com.imepac.site.interfaces.impl.UsersService;
 
-@Controller
-public class UsuarioController {
+@RestController
+@RequestMapping(value = "/users")
+public class UsersController {
 
 	@Autowired
-	private UsersServico usuarioServico;
+	private UsersService usuarioServico;
 
-	@RequestMapping(method = RequestMethod.GET, value = "usuarios/cadastrar")
-	public String homePageCadastrar() {
-		return "usuarios/cadastrar";
+	@GetMapping
+	public List<Users> homePageCadastrar() {
+		return usuarioServico.reads();
 	}
+	
+	@PostMapping
+	public ResponseEntity<Void> insert(@Valid @RequestBody Users users) {
+		  usuarioServico.save(users);
+		  return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Void> update(@PathVariable Long id, @Valid @RequestBody Users users){
+		Users usersUpdate = usuarioServico.read(id);
+		BeanUtils.copyProperties(users, usersUpdate, "id");
+		usuarioServico.save(usersUpdate);
+		return ResponseEntity.noContent().build();
+	}
+	
+	
 
 	@RequestMapping(method = RequestMethod.POST, value = "usuarios/salvar")
 	public ModelAndView salvar(@Valid Users usuario, BindingResult bindingResult) {
@@ -40,7 +63,7 @@ public class UsuarioController {
 			modelAndView.addObject("message_success", "Cadastro efetuado com sucesso!");
 		}
 		return modelAndView;
-	}
+	} 
 
 	@RequestMapping(method = RequestMethod.GET, value = "usuarios/gerenciar")
 	public ModelAndView gerenciar() {

@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import br.com.imepac.site.entities.Sweepstakes;
 
-public interface SweepstakesServico {
+public interface SweepstakesService {
 
 	public static void save(@Valid Sweepstakes sweepstakes) {
 		// TODO Auto-generated method stub

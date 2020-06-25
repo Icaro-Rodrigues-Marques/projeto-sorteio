@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import br.com.imepac.site.entities.Users;
 
 @Service
-public interface UsersServico  {
+public interface UsersService  {
 
 	public void save(Users usuario);
 
