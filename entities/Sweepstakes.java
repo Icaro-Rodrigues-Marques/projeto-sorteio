@@ -1,5 +1,6 @@
 package br.com.imepac.site.entities;
 
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,22 @@ public class Sweepstakes {
 
 	private long winner;
 	
+	@NotNull
+	private String foto;
 	
+	
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public void setUsers(List<Users> users) {
+		this.users = users;
+	}
 
 	public Long getId() {
 		return id;
@@ -117,6 +133,9 @@ public class Sweepstakes {
 	public void setWinner(long winner) {
 		this.winner = winner;
 	}
+	
+	
+	
 
 	
 	public List<Users> getUsers() {
@@ -147,6 +166,7 @@ public class Sweepstakes {
 			return false;
 		return true;
 	}
+
 	
 	
 }
